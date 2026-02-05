@@ -1,0 +1,148 @@
+<div class="landing-page">
+  <!-- Hero Section with Full-Screen Image -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="container">
+        <h1 class="hero-title">Financial Credit Rating Platform</h1>
+          <p class="hero-subtitle subtitle-box">
+              Advanced analytics and credit assessment
+          </p>
+
+          <div class="hero-actions">
+          <button class="btn btn-primary" (click)="openModal()">Get Started</button>
+          <button class="btn btn-secondary" (click)="navigateToAbout()">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <p class="section-eyebrow">OUR CAPABILITIES</p>
+            <h2 class="section-title">Platform Features</h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+
+                    <h3>Advanced Data Analytics</h3>
+                    <p>
+                        Ingest, validate, and analyze complex financial datasets with
+                        configurable metrics, dashboards, and exports.
+                    </p>
+                    <a class="feature-link" (click)="navigateToAbout()">
+                        Learn more →
+                    </a>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <h3>Credit Rating Engine</h3>
+                    <p>
+                        Automated rating classification from AAA to D using
+                        forward-looking indicators and weighted scoring models.
+                    </p>
+                    <a class="feature-link" (click)="navigateToAbout()">
+                        Learn more →
+                    </a>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <h3>Risk Assessment</h3>
+                    <p>
+                        Comprehensive risk profiling across financial, operational,
+                        and market-driven dimensions.
+                    </p>
+                    <a class="feature-link" (click)="navigateToAbout()">
+                        Learn more →
+                    </a>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <h3>Real-Time Processing</h3>
+                    <p>
+                        Event-driven architecture powered by Kafka for near-real-time
+                        scoring, alerts, and updates.
+                    </p>
+                    <a class="feature-link" (click)="navigateToAbout()">
+                        Learn more →
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Auth Modal -->
+  <div class="modal-overlay" *ngIf="showAuthModal" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="closeModal()">&times;</button>
+      <app-auth [isLoginMode]="isLoginMode" (toggleMode)="toggleAuthMode()"></app-auth>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container footer-grid">
+
+        <!-- Brand / About -->
+        <div class="footer-column">
+            <h4>Financial Rating Platform</h4>
+            <p class="footer-text">
+                A full-stack demo platform built to showcase skills in
+                Java, Spring Boot, Angular, PostgreSQL, and event-driven processing.
+                This project simulates real-world financial rating workflows.
+            </p>
+        </div>
+
+        <!-- Product -->
+        <div class="footer-column">
+            <h5>Product</h5>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Data Upload</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="#">API Access</a></li>
+            </ul>
+        </div>
+
+        <!-- Company -->
+        <div class="footer-column">
+            <h5>Company</h5>
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Legal -->
+        <div class="footer-column">
+            <h5>Legal</h5>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Use</a></li>
+                <li><a href="#">Disclaimer</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>
+            © {{ currentYear }} Financial Rating Platform.
+            Demo project for educational and portfolio purposes only.
+        </p>
+    </div>
+</footer>

@@ -1,0 +1,123 @@
+<div class="home-page">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <h1 class="logo">Financial Rating Platform</h1>
+
+            <div class="nav-actions">
+                <button class="btn btn-secondary" (click)="navigateToDashboard()">Dashboard</button>
+                <button class="btn btn-outline" (click)="logout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Welcome Back!</h2>
+                <p>Upload your financial data to get started with credit rating analysis</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="content-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">{{ summary.totalRecords }}</div>
+                    <div class="stat-label">Total Records</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-value">{{ summary.datasetCount }}</div>
+                    <div class="stat-label">Datasets</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-value">{{ getRatingCount() }}</div>
+                    <div class="stat-label">Ratings Generated</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UPLOAD -->
+    <section class="upload-section">
+        <h3>Upload Dataset</h3>
+
+        <div class="upload-container">
+            <input
+                    type="file"
+                    id="fileInput"
+                    class="file-input"
+                    accept=".csv,.xlsx,.xls"
+                    (change)="onFileSelected($event)"
+            />
+
+            <label for="fileInput" class="file-label">
+                <span *ngIf="!selectedFile">📁 Choose File</span>
+                <span *ngIf="selectedFile">📄 {{ selectedFile.name }}</span>
+            </label>
+
+            <button
+                    class="btn btn-primary"
+                    (click)="uploadFile()"
+                    [disabled]="!selectedFile || uploadProgress"
+            >
+                <span *ngIf="!uploadProgress">Upload</span>
+                <span *ngIf="uploadProgress">Uploading...</span>
+            </button>
+        </div>
+
+        <p class="upload-hint">Supported formats: CSV, XLSX, XLS (Max 50MB)</p>
+
+        <div
+                *ngIf="uploadMessage"
+                class="upload-message"
+                [class.error]="uploadError"
+                [class.success]="!uploadError"
+        >
+            {{ uploadMessage }}
+            <button class="close-btn" (click)="clearMessage()">×</button>
+        </div>
+        <div class="sample-divider">or</div>
+
+        <button
+                class="btn btn-outline sample-btn"
+                (click)="useSampleData()"
+                [disabled]="uploadProgress"
+        >
+            Try with Sample Data
+        </button>
+
+        <p class="upload-hint">
+            Loads a ready-made dataset so you can explore the dashboard instantly.
+        </p>
+
+
+    </section>
+
+    <!-- RECENT DATASETS -->
+    <section class="recent-datasets" *ngIf="datasetsLoaded && recentDatasets.length > 0">
+        <h3>Recent Datasets</h3>
+
+        <div class="datasets-list">
+            <div class="dataset-item" *ngFor="let dataset of recentDatasets">
+                <div class="dataset-info">
+                    <div class="dataset-name">{{ dataset.name }}</div>
+                    <div class="dataset-meta">
+                        {{ dataset.recordCount || 0 }} records • {{ dataset.status }}
+                    </div>
+                </div>
+
+                <div class="dataset-badge" [class]="'badge-' + dataset.status.toLowerCase()">
+                    {{ dataset.status }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

@@ -1,0 +1,81 @@
+<div class="dashboard-page">
+  <nav class="navbar">
+    <div class="container nav-container">
+      <h1 class="logo">Financial Rating Platform</h1>
+      <div class="nav-actions">
+        <button class="btn btn-secondary" (click)="goHome()">Home</button>
+        <button class="btn btn-outline" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="dashboard-content">
+    <div class="container">
+      <div class="dashboard-header">
+        <h2>Analytics Dashboard</h2>
+        <div class="search-bar">
+          <input 
+            type="text" 
+            [(ngModel)]="searchKeyword" 
+            (keyup.enter)="search()"
+            placeholder="Search by issuer name..." 
+            class="search-input"
+          />
+          <button class="btn btn-primary" (click)="search()">Search</button>
+        </div>
+      </div>
+
+      <div class="records-table-container">
+        <table class="records-table">
+          <thead>
+            <tr>
+              <th>Issuer</th>
+              <th>Industry</th>
+              <th>Country</th>
+              <th>Revenue</th>
+              <th>Debt/EBITDA</th>
+              <th>Rating</th>
+              <th>Category</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let record of records">
+              <td class="issuer-cell">{{ record.issuerName }}</td>
+              <td>{{ record.industry }}</td>
+              <td>{{ record.country }}</td>
+              <td>{{ record.revenue | number:'1.0-0' }}</td>
+              <td>{{ record.debtToEbitda | number:'1.2-2' }}</td>
+              <td>
+                <span class="rating-badge" [class]="'rating-' + getRatingClass(record.rating)">
+                  {{ record.rating.replace('_', ' ') }}
+                </span>
+              </td>
+              <td>
+                <span class="category-badge" [class]="'category-' + record.category.toLowerCase().replace('_', '-')">
+                  {{ record.category.replace('_', ' ') }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div *ngIf="records.length === 0" class="no-data">
+          No records found. Upload a dataset to get started.
+        </div>
+      </div>
+
+      <div class="pagination" *ngIf="totalRecords > 0">
+        <button class="btn btn-outline" (click)="prevPage()" [disabled]="currentPage === 0">
+          Previous
+        </button>
+        <span class="page-info">
+          Page {{ currentPage + 1 }} of {{ Math.ceil(totalRecords / pageSize) }}
+        </span>
+        <button class="btn btn-outline" (click)="nextPage()" 
+          [disabled]="(currentPage + 1) * pageSize >= totalRecords">
+          Next
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

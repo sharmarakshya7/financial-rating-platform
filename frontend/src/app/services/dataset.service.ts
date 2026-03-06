@@ -5,7 +5,7 @@ import { Dataset, DatasetUploadResponse } from '../models/dataset.model';
 
 @Injectable({ providedIn: 'root' })
 export class DatasetService {
-  private apiUrl = 'http://localhost:8080/api/datasets';
+  private apiUrl = '/api/datasets';
   private uploadTimeout = 60000; // 60 seconds timeout
 
   constructor(private http: HttpClient) {}

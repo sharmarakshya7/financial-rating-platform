@@ -1,4 +1,4 @@
-export interface FinancialRecord {
+ export interface FinancialRecord {
   id: number;
   issuerName: string;
   industry: string;
